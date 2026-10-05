@@ -2,7 +2,14 @@ import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'reac
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-const Login = () => {
+
+
+const Login = ({ navigation }: any) => {
+
+    const handleLogin = () => {
+        navigation.navigate("Dashboard")
+    }
+
     return (
         <SafeAreaView style={styles.container}>
 
