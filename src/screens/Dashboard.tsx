@@ -2,12 +2,21 @@ import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'rea
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { studentData } from '../data/studentData'
+import { DrawerActions,  } from '@react-navigation/native'
 
-const Dashboard = () => {
+const Dashboard = ({ navigation }: any) => {
+
+    const navigateMyCourses = () => {
+        navigation.navigate('MyCourses');
+    }
+
+    const handleDrawer = () => {
+       navigation.dispatch(DrawerActions.openDrawer())
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollContainer}>
-
 
                 {/* INFO SECTION */}
                 <View style={styles.infoContainer}>
@@ -77,7 +86,7 @@ const Dashboard = () => {
                         <Text style={styles.courseInfo}>Room No: {studentData.enrolled_courses[1].room}</Text>
                     </View>
 
-                    <TouchableOpacity style={styles.viewBtn}>
+                    <TouchableOpacity onPress={navigateMyCourses} style={styles.viewBtn}>
                         <Text style={styles.viewBtnText}>View All</Text>
                     </TouchableOpacity>
 
