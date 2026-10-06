@@ -13,7 +13,7 @@ const Login = ({ navigation }: any) => {
     return (
         <SafeAreaView style={styles.container}>
 
-            <Image style={styles.logo} source={require('../assets/images/SSUET-Logo.png')} />
+            <Image style={styles.logo} source={require('../assets/images/others/SSUET-Logo.png')} />
 
             <Text style={styles.heading}>STUDENT APP</Text>
 

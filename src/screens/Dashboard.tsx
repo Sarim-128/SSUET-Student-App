@@ -2,24 +2,16 @@ import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'rea
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { studentData } from '../data/studentData'
-import { DrawerActions,  } from '@react-navigation/native'
+import TimeTable from './TimeTable'
 
 const Dashboard = ({ navigation }: any) => {
-
-    const navigateMyCourses = () => {
-        navigation.navigate('MyCourses');
-    }
-
-    const handleDrawer = () => {
-       navigation.dispatch(DrawerActions.openDrawer())
-    }
 
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollContainer}>
 
                 {/* INFO SECTION */}
-                <View style={styles.infoContainer}>
+                <View style={[styles.sectionContainer, { padding: 10, }]}>
 
                     <Text style={styles.infoHeading}>Overview</Text>
                     <Text style={styles.info}>Name: {studentData.full_name} </Text>
@@ -29,10 +21,10 @@ const Dashboard = ({ navigation }: any) => {
                 </View>
 
                 {/* STATS SECTION */}
-                <View style={styles.statsContainer}>
+                <View style={styles.sectionContainer}>
 
-                    <View style={styles.statsHeadingContainer}>
-                        <Text style={styles.statsHeadingText}>My Stats</Text>
+                    <View style={styles.HeadingContainer}>
+                        <Text style={styles.HeadingText}>My Stats</Text>
                     </View>
 
 
@@ -64,42 +56,119 @@ const Dashboard = ({ navigation }: any) => {
 
 
                 {/*  COURSES SECTION */}
-                <View style={styles.courseContainer}>
+                <View style={styles.sectionContainer}>
 
-                    <View style={styles.statsHeadingContainer}>
-                        <Text style={styles.statsHeadingText}>My Courses</Text>
+                    <View style={styles.HeadingContainer}>
+                        <Text style={styles.HeadingText}>My Courses</Text>
                     </View>
 
-                    <View style={styles.courseItem}>
-                        <Text style={styles.courseTitle}>{studentData.enrolled_courses[0].title}</Text>
-                        <Text style={styles.courseInfo}>Course Code: {studentData.enrolled_courses[0].code}</Text>
-                        <Text style={styles.courseInfo}>Credit Hours: {studentData.enrolled_courses[0].credit_hours}</Text>
-                        <Text style={styles.courseInfo}>Instructor: {studentData.enrolled_courses[0].instructor}</Text>
-                        <Text style={styles.courseInfo}>Room No: {studentData.enrolled_courses[0].room}</Text>
-                    </View>
+                    <ScrollView style={styles.tableContainer}
+                        horizontal
+                    >
+                        <View style={styles.tableWrapper}>
 
-                    <View style={styles.courseItem}>
-                        <Text style={styles.courseTitle}>{studentData.enrolled_courses[1].title}</Text>
-                        <Text style={styles.courseInfo}>Course Code: {studentData.enrolled_courses[1].code}</Text>
-                        <Text style={styles.courseInfo}>Credit Hours: {studentData.enrolled_courses[1].credit_hours}</Text>
-                        <Text style={styles.courseInfo}>Instructor: {studentData.enrolled_courses[1].instructor}</Text>
-                        <Text style={styles.courseInfo}>Room No: {studentData.enrolled_courses[1].room}</Text>
-                    </View>
+                            {/* HEADER */}
+                            <View style={styles.tableHeaderContainer}>
 
-                    <TouchableOpacity onPress={navigateMyCourses} style={styles.viewBtn}>
+                                <View style={[styles.tableHeaderItem, { width: 50, }, styles.borderRight]}>
+                                    <Text style={styles.tableHeaderText}>NO.</Text>
+                                </View>
+
+                                <View style={[styles.tableHeaderItem, { width: 120, }, styles.borderRight]}>
+                                    <Text style={styles.tableHeaderText}>Name</Text>
+                                </View>
+
+                                <View style={[styles.tableHeaderItem, { width: 80, }, styles.borderRight]}>
+                                    <Text style={styles.tableHeaderText}>Course Code</Text>
+                                </View>
+
+                                <View style={[styles.tableHeaderItem, { width: 80, }, styles.borderRight]}>
+                                    <Text style={styles.tableHeaderText}>Credit Hours</Text>
+                                </View>
+
+                                <View style={[styles.tableHeaderItem, { width: 120, }, styles.borderRight]}>
+                                    <Text style={styles.tableHeaderText}>Instructor</Text>
+                                </View>
+
+                                <View style={[styles.tableHeaderItem, { width: 80, }, styles.borderRight]}>
+                                    <Text style={styles.tableHeaderText}>Room</Text>
+                                </View>
+
+                            </View>
+
+                            <View style={styles.tableBodyContainer}                            >
+                                <View style={[styles.tableBodyItem, { width: 50 }, styles.borderRight]}>
+                                    <Text style={styles.tableBodyText}>1</Text>
+                                </View>
+
+                                <View style={[styles.tableBodyItem, { width: 120 }, styles.borderRight]}>
+                                    <Text style={styles.tableBodyText}>{studentData.enrolled_courses[0].title}</Text>
+                                </View>
+
+                                <View style={[styles.tableBodyItem, { width: 80 }, styles.borderRight]}>
+                                    <Text style={styles.tableBodyText}>{studentData.enrolled_courses[0].code}</Text>
+                                </View>
+
+                                <View style={[styles.tableBodyItem, { width: 80 }, styles.borderRight]}>
+                                    <Text style={styles.tableBodyText}>{studentData.enrolled_courses[0].credit_hours}</Text>
+                                </View>
+
+                                <View style={[styles.tableBodyItem, { width: 120 }, styles.borderRight]}>
+                                    <Text style={styles.tableBodyText}>{studentData.enrolled_courses[0].instructor}</Text>
+                                </View>
+
+                                <View style={[styles.tableBodyItem, { width: 80 }, styles.borderRight]}>
+                                    <Text style={styles.tableBodyText}>{studentData.enrolled_courses[0].room}</Text>
+                                </View>
+                            </View>
+
+                            <View style={styles.tableBodyContainer}                            >
+                                <View style={[styles.tableBodyItem, { width: 50 }, styles.borderRight]}>
+                                    <Text style={styles.tableBodyText}>2</Text>
+                                </View>
+
+                                <View style={[styles.tableBodyItem, { width: 120 }, styles.borderRight]}>
+                                    <Text style={styles.tableBodyText}>{studentData.enrolled_courses[1].title}</Text>
+                                </View>
+
+                                <View style={[styles.tableBodyItem, { width: 80 }, styles.borderRight]}>
+                                    <Text style={styles.tableBodyText}>{studentData.enrolled_courses[1].code}</Text>
+                                </View>
+
+                                <View style={[styles.tableBodyItem, { width: 80 }, styles.borderRight]}>
+                                    <Text style={styles.tableBodyText}>{studentData.enrolled_courses[1].credit_hours}</Text>
+                                </View>
+
+                                <View style={[styles.tableBodyItem, { width: 120 }, styles.borderRight]}>
+                                    <Text style={styles.tableBodyText}>{studentData.enrolled_courses[1].instructor}</Text>
+                                </View>
+
+                                <View style={[styles.tableBodyItem, { width: 80 }, styles.borderRight]}>
+                                    <Text style={styles.tableBodyText}>{studentData.enrolled_courses[1].room}</Text>
+                                </View>
+                            </View>
+
+                        </View>
+                    </ScrollView>
+
+                    <TouchableOpacity onPress={() => navigation.navigate('MyCourses')} style={styles.viewBtn}>
                         <Text style={styles.viewBtnText}>View All</Text>
                     </TouchableOpacity>
 
-                    {/* {studentData.enrolled_courses.map((item) => (
-                        <View style={styles.courseItem}>
-                            <Text style={styles.courseTitle}>{item.title}</Text>
-                            <Text style={styles.courseInfo}>{item.code}</Text>
-                            <Text style={styles.courseInfo}>{item.credit_hours}</Text>
-                            <Text style={styles.courseInfo}>{item.instructor}</Text>
-                            <Text style={styles.courseInfo}>{item.room}</Text>
-                        </View>
-                    ))} */}
+                </View>
 
+                {/* TIME TABLE SECTION */}
+                <View style={styles.sectionContainer}>
+
+                    <View style={styles.HeadingContainer}>
+                        <Text style={styles.HeadingText}>Time Table</Text>
+                    </View>
+
+                    <Image style={{ width: '100%', height: 210, borderBottomWidth: 3, borderBottomColor: '#000' }} source={require('../assets/images/others/timetable.png')} />
+
+                    <TouchableOpacity onPress={() => navigation.navigate('TimeTable')} style={styles.viewBtn}>
+                        <Text style={styles.viewBtnText}>Full View</Text>
+                    </TouchableOpacity>
                 </View>
 
             </ScrollView >
@@ -118,15 +187,29 @@ const styles = StyleSheet.create({
         padding: 15,
     },
 
-    // INFO SECTION
-
-    infoContainer: {
+    sectionContainer: {
         backgroundColor: '#FFFFFF',
         borderRadius: 10,
-        padding: 10,
         elevation: 10,
         marginBottom: 30,
     },
+
+    HeadingContainer: {
+        backgroundColor: '#F64E60',
+        width: '100%',
+        height: 50,
+        justifyContent: 'center',
+        borderTopEndRadius: 10,
+        borderTopLeftRadius: 10,
+    },
+    HeadingText: {
+        color: '#FFFFFF',
+        fontWeight: 'bold',
+        fontSize: 22,
+        marginLeft: 8,
+    },
+
+    // INFO SECTION
     infoHeading: {
         fontSize: 20,
         fontWeight: 'bold',
@@ -137,27 +220,6 @@ const styles = StyleSheet.create({
     },
 
     // CARD SECTION
-    statsContainer: {
-        backgroundColor: "#FFFFFF",
-        alignItems: 'center',
-        elevation: 10,
-        borderRadius: 10,
-        marginBottom: 30,
-    },
-    statsHeadingContainer: {
-        backgroundColor: '#F64E60',
-        width: '100%',
-        height: 50,
-        justifyContent: 'center',
-        borderTopEndRadius: 10,
-        borderTopLeftRadius: 10,
-    },
-    statsHeadingText: {
-        color: '#FFFFFF',
-        fontWeight: 'bold',
-        fontSize: 22,
-        marginLeft: 8,
-    },
     cardWrapper: {
         padding: 15,
         width: '100%',
@@ -181,20 +243,6 @@ const styles = StyleSheet.create({
     },
 
     // COURSE SECTION
-    courseContainer: {
-        backgroundColor: "#FFFFFF",
-        elevation: 10,
-        borderRadius: 10,
-        marginBottom: 30,
-    },
-    courseItem: {
-        padding: 15,
-    },
-    courseTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 5,
-    },
     courseInfo: {
         marginBottom: 2,
     },
@@ -205,11 +253,65 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         borderRadius: 8,
         marginVertical: 15,
+        width: '70%',
+        justifyContent: 'center',
+        height: 60
     },
     viewBtnText: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold',
-        color: '#FFFFFF'
+        color: '#FFFFFF',
+        textAlign: 'center'
+    },
+
+
+    // TABLE SECTION
+
+
+    tableContainer: {
+        flex: 1,
+        backgroundColor: '#FFFFFF',
+    },
+    tableWrapper: {
+
+    },
+    tableHeaderContainer: {
+        backgroundColor: '#3699FF',
+        flexDirection: 'row',
+        alignItems: 'stretch',
+    },
+    tableHeaderItem: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 15,
+        paddingHorizontal: 5
+    },
+    tableHeaderText: {
+        fontWeight: 'bold',
+        color: '#FFFFFF',
+        textAlign: 'center',
+    },
+    tableBodyContainer: {
+        flexDirection: 'row',
+        alignItems: "stretch",
+        justifyContent: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: '#E2E8F0',
+    },
+    tableBodyItem: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 15,
+        paddingHorizontal: 5
+    },
+    tableBodyText: {
+        color: '#333333',
+        fontSize: 14,
+        textAlign: 'center',
+    },
+    borderRight: {
+        borderRightWidth: 1,
+        borderRightColor: '#c5c5c5',
     },
 
 

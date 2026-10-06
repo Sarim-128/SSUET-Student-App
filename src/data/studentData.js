@@ -14,7 +14,7 @@ export const studentData = {
     {
       code: "CS-301",
       title: "Data Structures & Algorithms",
-      credit_hours: 4,
+      credit_hours: 3,
       instructor: "Dr. Alan Turing",
       room: "Lab 4B",
       grade: "A-"
@@ -22,7 +22,7 @@ export const studentData = {
     {
       code: "CS-303",
       title: "Database Management Systems",
-      credit_hours: 3,
+      credit_hours: 2,
       instructor: "Dr. Edgar Codd",
       room: "Hall 3",
       grade: "B+"
@@ -38,9 +38,17 @@ export const studentData = {
     {
       code: "ENG-300",
       title: "Technical Writing",
-      credit_hours: 2,
+      credit_hours: 1,
       instructor: "Dr. Jane Austen",
       room: "Room 204",
+      grade: "A"
+    },
+    {
+      code: "PHY-425",
+      title: "Applied Physics",
+      credit_hours: 3,
+      instructor: "Prof. Robert John",
+      room: "Room 104",
       grade: "A"
     }
   ]

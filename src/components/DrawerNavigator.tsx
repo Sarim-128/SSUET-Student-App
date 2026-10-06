@@ -30,7 +30,7 @@ const MyDrawer = () => {
                 }}
             />
 
-            <Drawer.Screen name='My Courses' component={MyCourses}
+            <Drawer.Screen name='MyCourses' component={MyCourses}
                 options={{
                     drawerIcon: ({ color, size }: any) => (
                         <Image source={require('../assets/images/drawer/courses.png')}
@@ -40,7 +40,7 @@ const MyDrawer = () => {
                 }}
             />
 
-            <Drawer.Screen name='Time Table' component={TimeTable}
+            <Drawer.Screen name='TimeTable' component={TimeTable}
                 options={{
                     drawerIcon: ({ color, size }: any) => (
                         <Image source={require('../assets/images/drawer/timeTable.png')}
