@@ -60,7 +60,7 @@ const MyDrawer = () => {
                 }}
             />
 
-            <Drawer.Screen name='Announcement' component={Annoucements}
+            <Drawer.Screen name='Announcements' component={Annoucements}
                 options={{
                     drawerIcon: ({ color, size }: any) => (
                         <Image source={require('../assets/images/drawer/announcements.png')}

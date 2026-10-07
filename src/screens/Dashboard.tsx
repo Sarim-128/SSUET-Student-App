@@ -186,7 +186,6 @@ const styles = StyleSheet.create({
     scrollContainer: {
         padding: 15,
     },
-
     sectionContainer: {
         backgroundColor: '#FFFFFF',
         borderRadius: 10,
