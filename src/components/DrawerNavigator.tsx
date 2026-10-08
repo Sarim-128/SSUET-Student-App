@@ -17,11 +17,11 @@ const MyDrawer = () => {
                 drawerActiveTintColor: '#4899FF',
                 drawerActiveBackgroundColor: '#F3F6F9',
             }}
-
         >
-
+            
             <Drawer.Screen name='Dashboard' component={Dashboard}
                 options={{
+                    headerShown: false,
                     drawerIcon: ({ color, size }: any) => (
                         <Image source={require('../assets/images/drawer/dashboard.png')}
                             style={{ width: size, height: size, tintColor: color }}

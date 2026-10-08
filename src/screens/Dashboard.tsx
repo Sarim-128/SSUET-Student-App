@@ -1,23 +1,52 @@
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { studentData } from '../data/studentData'
-import TimeTable from './TimeTable'
+import { DrawerActions } from '@react-navigation/native'
 
 const Dashboard = ({ navigation }: any) => {
 
+    const handleLogout = () => {
+        Alert.alert(
+            'Logout',
+            'Are you sure you want to logout?',
+            [
+                { text: 'Cancel', style: 'cancel' },
+                { text: 'Logout', style: 'destructive', onPress: () => navigation.navigate('Login') }
+            ]
+        )
+    }
+
     return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView style={styles.scrollContainer}>
+        <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+
+            <StatusBar barStyle='dark-content' />
+
+            {/* HEADER SECTION */}
+            < View style={styles.headerContainer} >
+
+                <TouchableOpacity style={styles.iconBtn} onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+                    <Image style={styles.headerIcon} source={require('../assets/images/dashboard/menu.png')} />
+                </TouchableOpacity>
+
+                <Text style={styles.headerTitle}>Dashboard</Text>
+
+                <TouchableOpacity style={styles.iconBtn} onPress={handleLogout}>
+                    <Image style={styles.headerIcon} source={require('../assets/images/dashboard/logout.png')} />
+                </TouchableOpacity>
+
+            </View >
+
+            <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
 
                 {/* INFO SECTION */}
-                <View style={[styles.sectionContainer, { padding: 10, }]}>
 
-                    <Text style={styles.infoHeading}>Overview</Text>
-                    <Text style={styles.info}>Name: {studentData.full_name} </Text>
-                    <Text style={styles.info}>Roll No: {studentData.student_id} </Text>
-                    <Text style={styles.info}>Section: {studentData.section} </Text>
-
+                <View style={styles.profileCard}>
+                    <Text style={styles.infoHeading}>{studentData.full_name}</Text>
+                    <Text style={styles.infoSubText}>Roll No: {studentData.student_id}</Text>
+                    <View style={styles.profileBadge}>
+                        <Text style={styles.profileBadgeText}>{studentData.section}</Text>
+                    </View>
                 </View>
 
                 {/* STATS SECTION */}
@@ -158,7 +187,7 @@ const Dashboard = ({ navigation }: any) => {
                 </View>
 
                 {/* TIME TABLE SECTION */}
-                <View style={styles.sectionContainer}>
+                <View style={[styles.sectionContainer, { marginBottom: 100 }]}>
 
                     <View style={styles.HeadingContainer}>
                         <Text style={styles.HeadingText}>Time Table</Text>
@@ -173,6 +202,7 @@ const Dashboard = ({ navigation }: any) => {
 
             </ScrollView >
         </SafeAreaView >
+
     )
 }
 
@@ -181,41 +211,90 @@ export default Dashboard
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#e2e2e2',
+        backgroundColor: '#FFFFFF',
+    },
+    headerContainer: {
+        backgroundColor: '#FFFFFF',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 20,
+        paddingVertical: 14,
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: '#E5E9F2',
+    },
+    headerTitle: {
+        fontSize: 18,
+        fontWeight: '700',
+        color: '#1E293B',
+    },
+    iconBtn: {
+        padding: 4,
+    },
+    headerIcon: {
+        width: 22,
+        height: 22,
     },
     scrollContainer: {
         padding: 15,
+        backgroundColor: '#F4F6F9',
     },
     sectionContainer: {
         backgroundColor: '#FFFFFF',
-        borderRadius: 10,
-        elevation: 10,
-        marginBottom: 30,
+        borderRadius: 14,
+        marginBottom: 20,
+        overflow: 'hidden',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 8,
+        elevation: 2,
     },
 
     HeadingContainer: {
         backgroundColor: '#F64E60',
-        width: '100%',
-        height: 50,
+        paddingHorizontal: 16,
+        paddingVertical: 14,
         justifyContent: 'center',
-        borderTopEndRadius: 10,
-        borderTopLeftRadius: 10,
     },
     HeadingText: {
         color: '#FFFFFF',
-        fontWeight: 'bold',
-        fontSize: 22,
-        marginLeft: 8,
+        fontWeight: '700',
+        fontSize: 18,
     },
 
+
     // INFO SECTION
+    profileCard: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: 14,
+        padding: 20,
+        marginBottom: 20,
+        elevation: 2,
+    },
+    profileBadge: {
+        alignSelf: 'flex-start',
+        backgroundColor: '#EEF2FF',
+        paddingHorizontal: 10,
+        paddingVertical: 4,
+        borderRadius: 6,
+        marginBottom: 8,
+        marginTop: 8,
+    },
+    profileBadgeText: {
+        color: '#4F46E5',
+        fontWeight: '600',
+        fontSize: 12,
+    },
     infoHeading: {
         fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 10,
+        fontWeight: '700',
+        color: '#0F172A',
+        marginBottom: 4,
     },
-    info: {
-        fontSize: 16
+    infoSubText: {
+        fontSize: 14,
+        color: '#64748B',
     },
 
     // CARD SECTION
@@ -247,20 +326,18 @@ const styles = StyleSheet.create({
     },
     viewBtn: {
         alignSelf: 'center',
-        backgroundColor: '#7337EE',
-        paddingHorizontal: 15,
+        backgroundColor: '#4F46E5',
         paddingVertical: 12,
-        borderRadius: 8,
-        marginVertical: 15,
-        width: '70%',
-        justifyContent: 'center',
-        height: 60
+        borderRadius: 10,
+        marginVertical: 16,
+        width: '80%',
+        alignItems: 'center',
+        elevation: 3,
     },
     viewBtnText: {
-        fontSize: 18,
-        fontWeight: 'bold',
+        fontSize: 15,
+        fontWeight: '600',
         color: '#FFFFFF',
-        textAlign: 'center'
     },
 
 
